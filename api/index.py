@@ -1,12 +1,16 @@
+from os import environ as env
+from dotenv import load_dotenv, find_dotenv
 import telebot
 import flask
-from werkzeug.middleware.proxy_fix import ProxyFix
 
-TOKEN="6489626721:AAESYIEpSOFBDFJp3fjfJ_6qC8azb8a_Z1Q"
-DEBUG=True
+load_dotenv("../.env.local")
 
-bot = telebot.TeleBot(TOKEN)
-bot.set_webhook(url="https://vtct6rkk-5173.euw.devtunnels.ms/api")
+WEBHOOK_URL = "https://" + env.get("VERCEL_URL")
+if env.get("VERCEL_ENV") == "development":
+	WEBHOOK_URL = env.get("DEV_WEBHOOK_URL")
+
+bot = telebot.TeleBot(env.get("TOKEN"))
+bot.set_webhook(url=WEBHOOK_URL)
 
 app = flask.Flask(__name__)
 
@@ -16,7 +20,8 @@ def send_welcome(message):
 
 @app.route("/api")
 def index():
-	return "HELLO!"
+	return WEBHOOK_URL
+
 
 @app.route("/api", methods=["POST"])
 def webhook():
@@ -24,7 +29,7 @@ def webhook():
 		json_string = flask.request.get_data().decode('utf-8')
 		update = telebot.types.Update.de_json(json_string)
 		bot.process_new_updates([update])
-		return " XX "
+		return ''
 	else:
 		flask.abort(403)
 
