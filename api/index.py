@@ -1,5 +1,5 @@
 from os import environ as env
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 import telebot
 import flask
 
@@ -32,18 +32,3 @@ def webhook():
 		return ''
 	else:
 		flask.abort(403)
-
-# class handler(BaseHTTPRequestHandler):
-# 	def do_GET(self):
-# 		self.send_response(200)
-# 		self.send_header('Content-type','text/plain')
-# 		self.end_headers()
-# 		self.wfile.write("Hello".encode('utf-8'))
-# 		return
-# 	def do_POST(self):
-# 		self.send_response(200)
-# 		self.send_header('Content-type','text/plain')
-# 		self.end_headers()
-# 		content_len = int(self.headers.get('Content-Length'))
-# 		bot.process_new_updates([telebot.types.Update.de_json(self.rfile.read(content_len).decode('utf-8'))])
-# 		return
