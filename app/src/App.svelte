@@ -2,18 +2,17 @@
 	import Counter from "./lib/Counter.svelte";
 
 	import WebApp from "@twa-dev/sdk";
+	// WebApp.ready();
 
-	const params = WebApp.initData;
-	WebApp.MainButton.show();
-	$: isv = WebApp.BackButton.isVisible;
-	WebApp.MainButton.onClick(() => {
-		WebApp.BackButton.isVisible = isv ? false : true;
-	});
+	const initData = WebApp.initData;
+	const validateData = () => {};
+	// const sent = WebApp.sendData(WebApp.platform);
+
 </script>
 
 <main>
 	<h3>This is Telesim TWA page.</h3>
-	<p>WebApp params: <code></code></p>
+	<p>WebApp params: <code>{WebApp.platform}</code></p>
 	<Counter />
 </main>
 
