@@ -1,3 +1,9 @@
 {
-	"devCommand": "vite dev --port $PORT"
+	"devCommand": "vite dev --port $PORT",
+	"rewrites": [
+		{
+			"source": "/(.*)",
+			"destination": "/api/index"
+		}
+	]
 }

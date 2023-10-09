@@ -1,16 +1,16 @@
-from urllib.parse import urlunparse
 import logging
 import telebot
 
-bot = None
+from . import env
 
-def init(WEBHOOK_URL, TOKEN):
-	bot = telebot.TeleBot(TOKEN)
-	bot.remove_webhook()
-	bot.set_webhook(urlunparse("https", WEBHOOK_URL, f"api/bot/{TOKEN}"))
+telebot.logger.setLevel(logging.DEBUG)
+
+bot = telebot.TeleBot(env.TOKEN)
+bot.remove_webhook()
+bot.set_webhook(f"{env.WEBHOOK_URL}/{env.TOKEN}")
 
 def process_webhook(upd_json):
-	update = bot.types.Update.de_json(upd_json)
+	update = telebot.types.Update.de_json(upd_json)
 	bot.process_new_updates([update])
 
 @bot.message_handler(func=lambda m: True)

@@ -1,13 +1,16 @@
-from os import environ
-import flask
-from src import env, bot, db
+import os
+import logging
 
-env = env.init(environ)
-bot = bot.init(env.VERCEL_URL, env.TOKEN)
+import flask
+
+from src import env, bot
+
 app = flask.Flask(__name__)
 
+app.logger.setLevel(logging.DEBUG)
+
 @app.route(f"/api/bot/{env.TOKEN}", methods=["POST"])
-def bot_webhook(token):
+def bot_webhook():
 	if flask.request.headers.get('content-type') == 'application/json':
 		bot.process_webhook(upd_json=flask.request.get_data().decode('utf-8'))
 		return ""

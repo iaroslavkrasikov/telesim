@@ -1,12 +1,9 @@
+from os import environ
 from dotenv import dotenv_values
 
-class AttributeDict(dict):
-    __getattr__ = dict.__getitem__
-    __setattr__ = dict.__setitem__
-    __delattr__ = dict.__delitem__
+locals().update({
+	**environ,
+	**dotenv_values(".env.local", verbose=True)
+})
 
-def init(environ):
-	return AttributeDict({
-    	**dotenv_values(".env.local"),
-    	**environ
-	})
+if not "WEBHOOK_URL" in locals(): WEBHOOK_URL = DEV_WEBHOOK_URL # pyright: ignore
