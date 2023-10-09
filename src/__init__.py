@@ -1,4 +1,3 @@
-from os import environ
 import flask
 from src import env, bot, db
 
