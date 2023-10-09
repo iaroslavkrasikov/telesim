@@ -1,4 +1,3 @@
-import os
 import logging
 
 import flask
@@ -7,7 +6,7 @@ from src import env, bot
 
 app = flask.Flask(__name__)
 
-app.logger.setLevel(logging.DEBUG)
+print(env.VERCEL_URL, env.WEBHOOK_URL)
 
 @app.route(f"/api/bot/{env.TOKEN}", methods=["POST"])
 def bot_webhook():
