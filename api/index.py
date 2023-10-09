@@ -2,7 +2,7 @@ import logging
 
 import flask
 
-from src import env, bot, db
+from server import env, bot, db
 
 app = flask.Flask(__name__)
 
