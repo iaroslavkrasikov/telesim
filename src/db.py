@@ -1,3 +1,3 @@
-import psycopg
+from . import env
 
-# db = psycopg.connect(env.POSTGRES_URL)
+#db = psycopg.connect(env.POSTGRES_URL)

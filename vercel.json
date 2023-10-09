@@ -1,6 +1,7 @@
 {
 	"framework": "vite",
-	"devCommand": "vite dev --port $PORT -d",
+	"devCommand": "vite dev --port $PORT",
+	"trailingSlash": false,
 	"rewrites": [
 		{
 			"source": "/api/(.*)",
