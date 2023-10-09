@@ -7,6 +7,7 @@ export default defineConfig({
 	plugins: [svelte()],
 	root: 'app',
 	build: {
-		outDir: '../dist'
+		outDir: '../dist',
+		emptyOutDir: true
 	}
 });
