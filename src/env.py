@@ -2,7 +2,7 @@ from os import environ, path
 import hashlib
 from dotenv import dotenv_values
 
-print("test " * 6)
+print("(env) loaded")
 
 locals().update({
 	**environ,
