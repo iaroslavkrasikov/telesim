@@ -15,7 +15,9 @@ def bot_webhook():
 	headers = flask.request.headers
 	if  headers.get("Content-Type") == "application/json" and \
 		headers.get("X-Telegram-Bot-Api-Secret-Token") == env.TOKEN_MD5: 
+
 		bot.process_update(upd_json=flask.request.get_data().decode('utf-8'))
+		
 		return flask.Response(status=204)
 	else:
 		return flask.Response(status=403)
