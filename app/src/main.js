@@ -1,7 +1,7 @@
 import './app.css';
 import App from './App.svelte';
 
-// TODO: Remove eruda
+// Use eruda in development
 import eruda from 'eruda';
 import.meta.env.MODE == 'development' ? eruda.init() : null;
 

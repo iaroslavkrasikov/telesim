@@ -49,7 +49,7 @@ def start_handler(message):
 		"over more than 70 countries around the world. \n\n"
 		"Press *Open Telesim* or button below to begin." 
 	)
-	user_id = message.from_user_id
+	user_id = message.from_user.id
 
 	if is_user_active(user_id):
 		pass
