@@ -6,6 +6,10 @@ from src import env, bot, db
 app = flask.Flask(__name__)
 app.url_map.strict_slashes = False
 
+@app.route("/")
+def web_app():
+	return "Web app"
+
 @app.route("/api")
 def index():
 	return env.WEBHOOK_URL

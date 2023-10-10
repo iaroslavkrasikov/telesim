@@ -12,11 +12,10 @@ if webhook_info.url != env.WEBHOOK_URL:
 	bot.set_webhook(env.WEBHOOK_URL, secret_token=env.TOKEN_MD5)
 
 def is_user_active(user_id):
-	users = db.get("users", {"telegram_id": user_id})
+	user = db.get("user", {"telegram_id": user_id})
 
-	# TODO: check how many users returned
-	if user_id in users:
-		if users[user_id]["is_active"] == True:
+	if not user is None:
+		if user["is_active"] == True:
 			return True
 	return False
 
@@ -35,6 +34,10 @@ def web_app_inline_keyboard():
 def process_update(upd_json):
 	update = telebot.types.Update.de_json(upd_json)
 	bot.process_new_updates([update])
+
+@bot.message_handler(content_types=["web_app_data"])
+def web_app_data_handler(message):
+	bot.send_message(message.chat.id, message.web_app_data.data)
 
 @bot.message_handler(commands=["start"])
 def start_handler(message):
