@@ -1,6 +1,6 @@
 <script>
 </script>
 
-<main>SIM</main>
+<div></div>
 
 <style></style>

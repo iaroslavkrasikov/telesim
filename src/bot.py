@@ -20,8 +20,7 @@ def is_user_active(user_id):
 	return False
 
 def add_new_user(user_id):
-	db.create("user", {"telegram_id": message.from_user.id})
-
+	db.create("user", {"telegram_id": user_id})
 
 def web_app_inline_keyboard():
    keyboard = telebot.types.InlineKeyboardMarkup(row_width=1)
@@ -37,7 +36,9 @@ def process_update(upd_json):
 
 @bot.message_handler(content_types=["web_app_data"])
 def web_app_data_handler(message):
-	bot.send_message(message.chat.id, message.web_app_data.data)
+	# TODO: Check if we can webapp.sendData
+	#bot.send_message(message.chat.id, message.web_app_data.data)
+	pass
 
 @bot.message_handler(commands=["start"])
 def start_handler(message):

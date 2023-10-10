@@ -2,28 +2,33 @@
 	import WebApp from "@twa-dev/sdk";
 
 	import Logo from "./lib/Logo.svelte";
-	import Plans from "./lib/Plans.svelte";
-	import Sim from "./lib/SIM.svelte";
+	import Plans from "./lib/Plans/Plans.svelte";
+	import Sim from "./lib/SIM/SIM.svelte";
 	import History from "./lib/History.svelte";
-	import Info from "./lib/Info.svelte";
+	import Info from "./lib/Info/Info.svelte";
+	import { setContext } from "svelte";
+
+	setContext("webapp", WebApp);
 
 	const checkInitData = (unsafeInitData) => {
-		true
-	} 
+		return true;
+	};
 
-	const isUserActive = (userId)
+	const isUserActive = (userId) => {
+		return false;
+	};
 
 	let initData = checkInitData(WebApp.initData)
 		? WebApp.initDataUnsafe
-		: undefined;
+		: null;
 
 	const user = {
 		name: initData.user.id,
-		isActive: isUserActive(initData.user.id)
+		isActive: isUserActive(initData.user.id),
 	};
 </script>
 
-<main>
+<div class="container">
 	{#if !user.isActive}
 		<Logo />
 		<Info />
@@ -31,12 +36,15 @@
 		<History />
 	{:else}
 		<Sim />
-		Buy More:
+		<!-- Buy More: -->
 		<Plans />
 		<History />
 		<Info />
 	{/if}
-</main>
+</div>
 
 <style>
+	.container {
+		padding: 0 1em 0 1em;
+	}
 </style>
