@@ -1,7 +1,7 @@
 <script>
-	import faqIcon from "../../assets/icon/faq.svg";
-	import devicesIcon from "../../assets/icon/devices.svg";
-	import supportIcon from "../../assets/icon/support.svg";
+	import faqIcon from "../assets/icon/faq.svg";
+	import devicesIcon from "../assets/icon/devices.svg";
+	import supportIcon from "../assets/icon/support.svg";
 
 	import InfoButton from "./InfoButton.svelte";
 </script>

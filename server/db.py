@@ -1,9 +1,7 @@
 import psycopg
 from .env import env
 
-print(env['POSTGRES_URL'])
-
-db = psycopg.connect('postgresql://postgres:root@localhost:5432/telesim')
+db = psycopg.connect(env['POSTGRES_URL'])
 
 def get(table, data):
 	# TODO

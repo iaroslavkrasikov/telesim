@@ -1,11 +1,11 @@
 <script>
 	import WebApp from "@twa-dev/sdk";
 
-	import Logo from "./lib/Logo.svelte";
-	import Plans from "./lib/Plans/Plans.svelte";
-	import Sim from "./lib/SIM/SIM.svelte";
-	import History from "./lib/History.svelte";
-	import Info from "./lib/Info/Info.svelte";
+	import Logo from "./Logo.svelte";
+	import Info from "./Info.svelte";
+	import Plans from "./Plans.svelte";
+	import Sim from "./SIM.svelte";
+	import History from "./History.svelte";
 	import { setContext } from "svelte";
 
 	setContext("webapp", WebApp);

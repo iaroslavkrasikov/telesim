@@ -4,9 +4,15 @@
 	background-color: var(--tg-theme-bg-color);
 }
 
+* {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
 body {
 	margin: 0;
-	/* width: 100%; */
+	width: 100%;
 	min-height: 100vh;
 	font-family: -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Arial", sans-serif;
 	font-size: 17px;
@@ -16,15 +22,7 @@ body {
 	line-height: 22px;
 	letter-spacing: -0.43px;
 	text-rendering: optimizeLegibility;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
-}
-
-* {
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 }
 
 a {
@@ -58,6 +56,8 @@ button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
+
+/* Typography */
 
 .title {
 	font-size: 22px;

@@ -12,7 +12,6 @@
 	.logo {
 		display: flex;
 		height: 162px;
-		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;

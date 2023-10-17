@@ -25,17 +25,17 @@ def add_new_user(user_id):
 
 def web_app_inline_keyboard():
 	keyboard = telebot.types.InlineKeyboardMarkup(row_width=1)
-	# Remove "api/bot" from url
+	# Removing "api/bot" from url
 	web_app = telebot.types.WebAppInfo(env['WEBHOOK_URL'][:-len("api/bot")])
 	keyboard.add(
-	    telebot.types.InlineKeyboardButton(text="Get started",
-	                                       web_app=web_app))
+	    telebot.types.InlineKeyboardButton(text="Get started", web_app=web_app))
 
 	return keyboard
 
 def process_update(upd_json):
 	update = telebot.types.Update.de_json(upd_json)
-	bot.process_new_updates([update])
+	# TODO: Type issue
+	bot.process_new_updates([update])  # pyright: ignore
 
 @bot.message_handler(content_types=["web_app_data"])
 def web_app_data_handler(message):
