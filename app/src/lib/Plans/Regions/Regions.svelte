@@ -15,8 +15,7 @@
 	<Region
 		double={true}
 		--bg-color="linear-gradient(180deg, #5164A6 0%, #0E2267 91.67%)"
-		>All Europe</Region
-	>
+		>All Europe</Region>
 	<Region --bg-color="#BF4747">Asia & Australia</Region>
 	<Region --bg-color="#91CB7D">Latin America</Region>
 	<Region --bg-color="#3B92AE">Middle East</Region>
