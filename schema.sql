@@ -9,11 +9,11 @@ create table users
 );
 
 create unique index users_telegram_id_uindex
-	on users (telegram_id);
+	on users (id);
 
 alter table users
 	add constraint users_pk
-		primary key (telegram_id);
+		primary key (id);
 
 create table plans
 (
@@ -60,8 +60,8 @@ create unique index simcards_id_uindex
 create unique index simcards_pk
     on simcards (id);
 
-alter table simcards
-    add constraint simcards_pk
-        primary key (id);
+-- alter table simcards
+--     add constraint simcards_pk
+--         primary key (id);
 
 

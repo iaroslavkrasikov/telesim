@@ -1,22 +1,22 @@
 <script>
 	import WebApp from "@twa-dev/sdk";
 
+	import { onMount, setContext } from "svelte";
+
 	import Logo from "./Logo.svelte";
 	import Info from "./Info.svelte";
 	import Plans from "./Plans.svelte";
 	import Sim from "./SIM.svelte";
 	import History from "./History.svelte";
-	import { setContext } from "svelte";
 
 	setContext("webapp", WebApp);
 
-	const user = () => {
-		fetch("/bot/api/init", {
-			method: "POST",
-			headers: { "Content-Type": "text/plain" },
-			body: WebApp.initData,
-		});
-	};
+	let user = {};
+	onMount(async () => {
+		user = await fetch(`/api/user?${initData}`).then((data) => data.json());
+	});
+
+	console.log(WebApp.initData);
 </script>
 
 <div class="container">
