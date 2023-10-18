@@ -10,21 +10,12 @@
 
 	setContext("webapp", WebApp);
 
-	const checkInitData = (unsafeInitData) => {
-		return true;
-	};
-
-	const isUserActive = (userId) => {
-		return false;
-	};
-
-	let initData = checkInitData(WebApp.initData)
-		? WebApp.initDataUnsafe
-		: null;
-
-	const user = {
-		name: initData.user.id,
-		isActive: isUserActive(initData.user.id),
+	const user = () => {
+		fetch("/bot/api/init", {
+			method: "POST",
+			headers: { "Content-Type": "text/plain" },
+			body: WebApp.initData,
+		});
 	};
 </script>
 

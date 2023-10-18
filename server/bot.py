@@ -10,7 +10,11 @@ bot = telebot.TeleBot(env['TOKEN'])
 
 webhook_info = bot.get_webhook_info()
 if webhook_info.url != env['WEBHOOK_URL']:
-	bot.set_webhook(env['WEBHOOK_URL'], secret_token=env['TOKEN_MD5'])
+	bot.set_webhook(env['WEBHOOK_URL'], secret_token=env['SECRET'])
+
+def authorize(init_data: str) -> dict:
+
+	return {}
 
 def is_user_active(user_id):
 	user = db.get("user", {"telegram_id": user_id})

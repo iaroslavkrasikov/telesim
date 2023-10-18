@@ -5,6 +5,8 @@ from dotenv import dotenv_values
 env = {**environ, **dotenv_values(".env.local", verbose=True)}
 
 env["WEBHOOK_URL"] = path.expandvars(env["WEBHOOK_URL"])
-env["TOKEN_MD5"] = hashlib.md5(env["TOKEN"].encode("utf-8")).hexdigest()
+
+secret = f"{env['TOKEN']}WebAppData".encode("utf-8")
+env["SECRET"] = hashlib.sha256(secret).hexdigest()
 
 print("(env) loaded")
