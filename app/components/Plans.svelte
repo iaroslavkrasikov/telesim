@@ -1,6 +1,6 @@
 <script>
-	import PlanRegions from "./PlanRegions.svelte";
-	import PlanLimits from "./PlanLimits.svelte";
+	import PlanRegions from "app/components/PlanRegions.svelte";
+	import PlanLimits from "app/components/PlanLimits.svelte";
 </script>
 
 <div class="plans">

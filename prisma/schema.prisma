@@ -8,5 +8,46 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
+    url      = env("POSTGRES_URL")
+}
+
+model User {
+    telegram_id BigInt    @id
+    is_active   Boolean   @default(false)
+    balance     Decimal   @default(0.0)
+    currency    String    @default("USD") @db.VarChar(3)
+    Simcard     Simcard[]
+
+    @@map("users")
+}
+
+model Plan {
+    id             Int       @id @default(autoincrement())
+    technical_name String
+    regions        String[]
+    duration       BigInt
+    bytes          BigInt
+    price          Decimal
+    currency       String    @default("USD") @db.VarChar(3)
+    secret         String
+    is_active      Boolean
+    Simcard        Simcard[]
+
+    @@map("plans")
+}
+
+model Simcard {
+    id                      Int       @id @default(autoincrement())
+    user_id                 Int
+    User                    User      @relation(fields: [user_telegram_id], references: [telegram_id])
+    user_telegram_id        BigInt
+    Plan                    Plan      @relation(fields: [plan_id], references: [id])
+    plan_id                 Int
+    qr                      String
+    activated_at            DateTime  @default(now())
+    deactivated_at          DateTime?
+    remain_bytes            BigInt
+    remain_bytes_updated_at DateTime
+
+    @@map("simcards")
 }

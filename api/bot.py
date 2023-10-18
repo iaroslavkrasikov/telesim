@@ -2,7 +2,6 @@ import telebot
 import logging
 
 from .env import env
-from . import db
 
 telebot.logger.setLevel(logging.DEBUG)
 
@@ -31,8 +30,7 @@ def web_app_inline_keyboard():
 	keyboard = telebot.types.InlineKeyboardMarkup(row_width=1)
 	# Removing "api/bot" from url
 	web_app = telebot.types.WebAppInfo(env['WEBHOOK_URL'][:-len("api/bot")])
-	keyboard.add(
-	    telebot.types.InlineKeyboardButton(text="Get started", web_app=web_app))
+	keyboard.add(telebot.types.InlineKeyboardButton(text="Get started", web_app=web_app))
 
 	return keyboard
 
@@ -48,12 +46,11 @@ def web_app_data_handler(message):
 
 @bot.message_handler(commands=["start"])
 def start_handler(message):
-	welcome_text = (
-	    f"Welcome to [@telesimbot](tg://user?id={env['TOKEN'].split(':')[0]})! "
-	    "Here you can Buy our eSIM instantly with TON or any credit card, "
-	    "load it into your phone and start using the Internet "
-	    "over more than 70 countries around the world. \n\n"
-	    "Press *Open Telesim* or button below to begin.")
+	welcome_text = (f"Welcome to [@telesimbot](tg://user?id={env['TOKEN'].split(':')[0]})! "
+	                "Here you can Buy our eSIM instantly with TON or any credit card, "
+	                "load it into your phone and start using the Internet "
+	                "over more than 70 countries around the world. \n\n"
+	                "Press *Open Telesim* or button below to begin.")
 	user_id = message.from_user.id
 
 	if is_user_active(user_id):
@@ -61,10 +58,7 @@ def start_handler(message):
 	else:
 		add_new_user(user_id)
 
-	bot.send_message(message.chat.id,
-	                 text=welcome_text,
-	                 parse_mode="Markdown",
-	                 reply_markup=web_app_inline_keyboard())
+	bot.send_message(message.chat.id, text=welcome_text, parse_mode="Markdown", reply_markup=web_app_inline_keyboard())
 
 @bot.message_handler(func=lambda m: True)
 def any_message_handler(message):

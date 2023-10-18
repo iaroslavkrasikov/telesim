@@ -3,11 +3,11 @@
 
 	import { onMount, setContext } from "svelte";
 
-	import Logo from "./Logo.svelte";
-	import Info from "./Info.svelte";
-	import Plans from "./Plans.svelte";
-	import Sim from "./SIM.svelte";
-	import History from "./History.svelte";
+	import Logo from "app/components/Logo.svelte";
+	import Info from "app/components/Info.svelte";
+	import Plans from "app/components/Plans.svelte";
+	import Sim from "app/components/SIM.svelte";
+	import History from "app/components/History.svelte";
 
 	setContext("webapp", WebApp);
 
@@ -16,11 +16,12 @@
 		user = await fetch(`/api/user?${initData}`).then((data) => data.json());
 	});
 
-	console.log(WebApp.initData);
+	console.log(user);
 </script>
 
 <div class="container">
-	{#if !user.isActive}
+	<!-- {#if !user.isActive} -->
+	{#if true}
 		<Logo />
 		<Info />
 		<Plans />
