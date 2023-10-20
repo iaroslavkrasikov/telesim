@@ -1,6 +1,6 @@
 <script>
 	import { getContext } from "svelte";
-	import Region from "app/components/Region.svelte";
+	import Region from "./Region.svelte";
 
 	const webapp = getContext("webapp");
 	// TG desktop fix

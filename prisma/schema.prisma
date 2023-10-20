@@ -3,6 +3,7 @@
 
 generator client {
     provider             = "prisma-client-py"
+    interface            = "sync"
     recursive_type_depth = 5
 }
 
@@ -12,11 +13,11 @@ datasource db {
 }
 
 model User {
-    telegram_id BigInt    @id
-    is_active   Boolean   @default(false)
-    balance     Decimal   @default(0.0)
-    currency    String    @default("USD") @db.VarChar(3)
-    Simcard     Simcard[]
+    telegram_id  BigInt    @id
+    is_active    Boolean   @default(false)
+    balance_x100 BigInt    @default(0)
+    currency     String    @default("USD") @db.VarChar(3)
+    Simcard      Simcard[]
 
     @@map("users")
 }
@@ -27,7 +28,7 @@ model Plan {
     regions        String[]
     duration       BigInt
     bytes          BigInt
-    price          Decimal
+    price_x100     BigInt
     currency       String    @default("USD") @db.VarChar(3)
     secret         String
     is_active      Boolean

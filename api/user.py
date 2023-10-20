@@ -1,44 +1,54 @@
-from http.server import BaseHTTPRequestHandler
-from urllib.parse import urlparse, parse_qs
-import json, hashlib
+import json, hashlib, hmac
 
-from utils import env, db
+from urllib.parse import urlparse, parse_qs
+
+from utils import env, db, hmac_sha256
 
 def valid_init_data(init_data: dict) -> bool:
 	# Sorted key=value\n string format as in Telegram docs
 	init_data = dict(sorted(init_data.items()))
-	data_check_string = ''.join([f'{key}={value}\n' for key, value in init_data.items()])
-	_dcs = f"{data_check_string}{env['SECRET']}".encode('utf-8')
+	hash = init_data['hash']
+	del init_data['hash']
+	data_check_string = ''.join([f'{key}={value}\n' for key, value in init_data.items()]).strip()
 
-	if hashlib.sha256(_dcs).hexdigest() != init_data['hash']:
+	print(f"(validation)\n\thash={hash}\n\tdcs={data_check_string}\n\tsecret={type(env['SECRET'])}\n\t")
+
+	if hmac_sha256(env['SECRET'], data_check_string, encode_key=False) != hash:
 		return False
 
 	return True
 
-class handler(BaseHTTPRequestHandler):
-	def do_GET(self):
-		path = urlparse(self.path)
-		# parse_qs returns {key:[value]}
+def verify(f):
+	def decorator(handler: BaseHTTPRequestHandler, *args):
+		path = urlparse(handler.path)
+
+		# NOTE: parse_qs() returns {key:[value]}
 		init_data = {key: value[0] for key, value in parse_qs(path.query).items()}
 
 		if not valid_init_data(init_data):
-			self.send_response(403)
+			print(f"(auth) client banned\n\t")
+			handler.send_error(403)
 			return
 
 		init_data['user'] = json.loads(init_data['user'])
 
-		db.get_one('users', {'id': init_data['user']['id']})
+		return f(handler, init_data)
+
+	return decorator
+
+class handler(BaseHTTPRequestHandler):
+	@verify
+	def do_GET(self, *args):
+
+		user = db.user.find_unique(where={'telegram_id': init_data['user']['id']})
+
+		if user is None:
+			user = db.user.create({
+			    'telegram_id': init_data['user']['id'],
+			})
 
 		self.send_response(200)
 		self.send_header('Content-type', 'application/json')
 		self.end_headers()
-		self.wfile.write('Hello, world!'.encode('utf-8'))
+		self.wfile.write(user.model_dump_json().encode('utf-8'))
 		return
-
-@handler.get({'id': int})
-def get(id):
-	user = db.get_one('users', {'id': id})
-
-	if user is None:
-		hand
-		new_user = db.add('users', {''})

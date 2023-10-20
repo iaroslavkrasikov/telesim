@@ -1,5 +1,5 @@
 <script>
-	import telesimLogo from "app/assets/telesim-logo.png";
+	import telesimLogo from "../assets/telesim-logo.png";
 </script>
 
 <div class="logo">

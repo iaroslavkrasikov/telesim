@@ -1,9 +1,9 @@
 <script>
-	import faqIcon from "app/assets/icon/faq.svg";
-	import devicesIcon from "app/assets/icon/devices.svg";
-	import supportIcon from "app/assets/icon/support.svg";
+	import faqIcon from "../assets/icon/faq.svg";
+	import devicesIcon from "../assets/icon/devices.svg";
+	import supportIcon from "../assets/icon/support.svg";
 
-	import InfoButton from "app/components/InfoButton.svelte";
+	import InfoButton from "../components/InfoButton.svelte";
 </script>
 
 <div class="info">

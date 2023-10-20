@@ -9,8 +9,8 @@ class handler(BaseHTTPRequestHandler):
 		return
 
 def auth(f):
-	f
+	pass
 
-@auth
+# @auth
 def get(args):
-	
+	pass
