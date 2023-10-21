@@ -11,30 +11,29 @@
 
 	setContext("webapp", WebApp);
 
-	let user = {};
-	onMount(async () => {
-		user = await fetch(`/api/user?${WebApp.initData}`).then((data) =>
-			data.json()
-		);
-	});
-
-	console.log(user);
+	let user = fetch(`/api/user?${WebApp.initData}`).then((response) =>
+		response.json()
+	);
 </script>
 
 <div class="container">
-	<!-- {#if !user.isActive} -->
-	{#if true}
-		<Logo />
-		<Info />
-		<Plans />
-		<History />
-	{:else}
-		<Sim />
-		<!-- Buy More: -->
-		<Plans />
-		<History />
-		<Info />
-	{/if}
+	{#await user}
+		Loading
+	{:then user}
+		{#if !user.is_active}
+			<Logo />
+			<Info />
+			<Plans />
+			<History />
+		{:else}
+			Active
+			<Sim />
+			<!-- Buy More: -->
+			<Plans />
+			<History />
+			<Info />
+		{/if}
+	{/await}
 </div>
 
 <style>

@@ -2,10 +2,10 @@
 	import { getContext } from "svelte";
 	import Region from "./Region.svelte";
 
-	const webapp = getContext("webapp");
+	const WebApp = getContext("webapp");
 	// TG desktop fix
 	let viewportWidth = window.innerWidth;
-	if (webapp.platform == "tdesktop") {
+	if (WebApp.platform == "tdesktop") {
 		viewportWidth *= 0.97;
 	}
 </script>

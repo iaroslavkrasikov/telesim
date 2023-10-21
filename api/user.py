@@ -1,5 +1,5 @@
 import json, hashlib, hmac
-
+from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
 from utils import env, db, hmac_sha256
@@ -11,15 +11,13 @@ def valid_init_data(init_data: dict) -> bool:
 	del init_data['hash']
 	data_check_string = ''.join([f'{key}={value}\n' for key, value in init_data.items()]).strip()
 
-	print(f"(validation)\n\thash={hash}\n\tdcs={data_check_string}\n\tsecret={type(env['SECRET'])}\n\t")
-
 	if hmac_sha256(env['SECRET'], data_check_string, encode_key=False) != hash:
 		return False
 
 	return True
 
 def verify(f):
-	def decorator(handler: BaseHTTPRequestHandler, *args):
+	def decorator(handler: BaseHTTPRequestHandler):
 		path = urlparse(handler.path)
 
 		# NOTE: parse_qs() returns {key:[value]}
@@ -38,7 +36,7 @@ def verify(f):
 
 class handler(BaseHTTPRequestHandler):
 	@verify
-	def do_GET(self, *args):
+	def do_GET(self, init_data):
 
 		user = db.user.find_unique(where={'telegram_id': init_data['user']['id']})
 
