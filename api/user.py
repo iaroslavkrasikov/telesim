@@ -1,4 +1,4 @@
-import json, hashlib, hmac
+import json
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 
@@ -11,7 +11,7 @@ def valid_init_data(init_data: dict) -> bool:
 	del init_data['hash']
 	data_check_string = ''.join([f'{key}={value}\n' for key, value in init_data.items()]).strip()
 
-	if hmac_sha256(env['SECRET'], data_check_string, encode_key=False) != hash:
+	if hmac_sha256(env['SECRET'], data_check_string, encode_key=True) != hash:
 		return False
 
 	return True

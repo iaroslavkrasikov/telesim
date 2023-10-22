@@ -11,11 +11,11 @@
 	"devDependencies": {
 		"@sveltejs/vite-plugin-svelte": "^2.4.2",
 		"svelte": "^4.0.5",
-		"vite": "^4.4.5"
+		"vite": "^4.4.5",
+		"vite-plugin-vercel": "^0.3.6"
 	},
 	"dependencies": {
 		"@twa-dev/sdk": "^6.9.0",
-		"dotenv-cli": "^7.3.0",
-		"vite-plugin-vercel": "^0.3.6"
+		"country-flag-emoji-polyfill": "^0.1.4"
 	}
 }

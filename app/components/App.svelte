@@ -1,7 +1,8 @@
 <script>
 	import WebApp from "@twa-dev/sdk";
+	import { polyfillCountryFlagEmojis } from "country-flag-emoji-polyfill";
 
-	import { onMount, setContext } from "svelte";
+	import { setContext } from "svelte";
 
 	import Logo from "./Logo.svelte";
 	import Info from "./Info.svelte";
@@ -10,6 +11,7 @@
 	import History from "./History.svelte";
 
 	setContext("webapp", WebApp);
+	polyfillCountryFlagEmojis();
 
 	let user = fetch(`/api/user?${WebApp.initData}`).then((response) =>
 		response.json()

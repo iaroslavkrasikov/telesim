@@ -1,10 +1,10 @@
 <script>
 	export let double = false;
-	export let selector = false;
+	export let singleCountry = false;
 </script>
 
 <div>
-	{#if !selector}
+	{#if !singleCountry}
 		{#if double}
 			<div class="region region-double">
 				<div class="body-semibold"><slot /></div>

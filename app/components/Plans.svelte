@@ -1,10 +1,12 @@
 <script>
 	import PlanRegions from "./PlanRegions.svelte";
 	import PlanLimits from "./PlanLimits.svelte";
+
+	let region;
 </script>
 
 <div class="plans">
-	<PlanRegions />
+	<PlanRegions bind:region />
 	<PlanLimits />
 </div>
 

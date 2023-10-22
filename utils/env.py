@@ -7,6 +7,6 @@ env = {**environ, **dotenv_values(".env.local", verbose=True)}
 
 env["WEBHOOK_URL"] = path.expandvars(env["WEBHOOK_URL"])
 
-env["SECRET"] = hmac_sha256("WebAppData", env["TOKEN"], hex=False)
+env["SECRET"] = hmac_sha256("WebAppData", env["TOKEN"])
 
 print("(env) loaded")

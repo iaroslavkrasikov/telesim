@@ -1,7 +1,8 @@
 import sys
 import telebot
 import logging
-from server.env import env
+
+from utils import env
 
 telebot.logger.setLevel(logging.DEBUG)
 

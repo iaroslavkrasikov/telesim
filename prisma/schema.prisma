@@ -24,13 +24,13 @@ model User {
 
 model Plan {
     id             Int       @id @default(autoincrement())
-    technical_name String
+    technical_name String    @unique
     regions        String[]
     duration       BigInt
     bytes          BigInt
     price_x100     BigInt
     currency       String    @default("USD") @db.VarChar(3)
-    secret         String
+    secret         String?
     is_active      Boolean
     Simcard        Simcard[]
 
